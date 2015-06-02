@@ -16,12 +16,16 @@ This package contains an implementation of the original D3DXMath library spheric
     Test\
     - Tester application
 
-http://go.microsoft.com/fwlink/p/?LinkId=262885
-
 http://blogs.msdn.com/b/chuckw/archive/2012/07/28/spherical-harmonics-math.aspx
 
 http://blogs.msdn.com/b/chuckw/archive/2012/03/27/introducing-directxmath.aspx
 
+All content and source code for this package are subject to the terms of the MIT License.
+<http://opensource.org/licenses/MIT>.
+
+For the latest version and documentation, please visit the GitHub site.
+
+http://go.microsoft.com/fwlink/p/?LinkId=262885
 
 ---------------
 RELEASE HISTORY
