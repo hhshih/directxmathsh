@@ -14,6 +14,8 @@
 
 using namespace DirectX;
 
+#pragma warning( disable : 4619 4456 )
+
 namespace
 {
     #pragma prefast(disable:246, "generated code by maple (nested const variable definitions)")
