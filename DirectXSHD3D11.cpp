@@ -63,7 +63,7 @@ private:
         if ( size >= sizeof(type) )\
         {\
             const type * __restrict sPtr = reinterpret_cast<const type*>(pSource);\
-            for( size_t icount = 0; icount < size; icount += sizeof(type) )\
+            for( size_t icount = 0; icount < ( size - sizeof(type) + 1 ); icount += sizeof(type) )\
             {\
                 if ( dPtr >= ePtr ) break;\
                 *(dPtr++) = func( sPtr++ );\
@@ -76,7 +76,7 @@ private:
         if ( size >= sizeof(type) )\
         {\
             const type * __restrict sPtr = reinterpret_cast<const type*>(pSource);\
-            for( size_t icount = 0; icount < size; icount += sizeof(type) )\
+            for( size_t icount = 0; icount < ( size - sizeof(type) + 1 ); icount += sizeof(type) )\
             {\
                 XMVECTOR v = func( sPtr++ );\
                 if ( dPtr >= ePtr ) break;\
@@ -90,7 +90,7 @@ private:
         if ( size >= sizeof(type) )\
         {\
             const type * __restrict sPtr = reinterpret_cast<const type*>(pSource);\
-            for( size_t icount = 0; icount < size; icount += sizeof(type) )\
+            for( size_t icount = 0; icount < ( size - sizeof(type) + 1 ); icount += sizeof(type) )\
             {\
                 XMVECTOR v = func( sPtr++ );\
                 if ( dPtr >= ePtr ) break;\
@@ -100,6 +100,8 @@ private:
         }\
         return false;
 
+#pragma warning(push)
+#pragma warning(disable : 6101)
 _Success_(return)
 static bool _LoadScanline( _Out_writes_(count) DirectX::XMVECTOR* pDestination, _In_ size_t count,
                            _In_reads_bytes_(size) LPCVOID pSource, _In_ size_t size, _In_ DXGI_FORMAT format )
@@ -171,6 +173,7 @@ static bool _LoadScanline( _Out_writes_(count) DirectX::XMVECTOR* pDestination, 
         return false;
     }
 }
+#pragma warning(pop)
 
 }; // namespace anonymous
 

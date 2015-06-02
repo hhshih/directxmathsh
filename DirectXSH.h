@@ -13,7 +13,7 @@
 #pragma once
 #endif
 
-#define DIRECTX_SHMATH_VERSION 101
+#define DIRECTX_SHMATH_VERSION 102
 
 #include <DirectXMath.h>
 
