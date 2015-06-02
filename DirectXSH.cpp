@@ -970,9 +970,9 @@ namespace DirectX
 //
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb205448.aspx
 //-------------------------------------------------------------------------------------
-float* XMSHEvalDirection( _Out_writes_(order*order) float *result,
-                          _In_ size_t order,
-                          _In_ FXMVECTOR dir )
+float* XM_CALLCONV XMSHEvalDirection( _Out_writes_(order*order) float *result,
+                                      _In_ size_t order,
+                                      _In_ FXMVECTOR dir )
 {
     if ( !result )
         return nullptr;
@@ -1020,10 +1020,10 @@ float* XMSHEvalDirection( _Out_writes_(order*order) float *result,
 //
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb204992.aspx
 //-------------------------------------------------------------------------------------
-float* XMSHRotate( _Out_writes_(order*order) float *result,
-                   _In_ size_t order,
-                   _In_ CXMMATRIX rotMatrix,
-                   _In_reads_(order*order) const float *input )
+float* XM_CALLCONV XMSHRotate( _Out_writes_(order*order) float *result,
+                               _In_ size_t order,
+                               _In_ FXMMATRIX rotMatrix,
+                               _In_reads_(order*order) const float *input )
 {
     if ( !result || !input )
         return nullptr;
@@ -4437,12 +4437,12 @@ float* XMSHMultiply6( _Out_writes_(36) float *y,
 //
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb204988.aspx
 //-------------------------------------------------------------------------------------
-bool XMSHEvalDirectionalLight( _In_ size_t order,
-                               _In_ FXMVECTOR dir,
-                               _In_ FXMVECTOR color,
-                               _Out_writes_(order*order) float *resultR,
-                               _Out_writes_opt_(order*order) float *resultG,
-                               _Out_writes_opt_(order*order) float *resultB )
+bool XM_CALLCONV XMSHEvalDirectionalLight( _In_ size_t order,
+                                           _In_ FXMVECTOR dir,
+                                           _In_ FXMVECTOR color,
+                                           _Out_writes_(order*order) float *resultR,
+                                           _Out_writes_opt_(order*order) float *resultG,
+                                           _Out_writes_opt_(order*order) float *resultB )
 {
     if ( !resultR )
         return false;
@@ -4502,13 +4502,13 @@ bool XMSHEvalDirectionalLight( _In_ size_t order,
 //
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb205451.aspx
 //-------------------------------------------------------------------------------------
-bool XMSHEvalSphericalLight( _In_ size_t order,
-                             _In_ FXMVECTOR pos,
-                             _In_ float radius,
-                             _In_ FXMVECTOR color,
-                             _Out_writes_(order*order) float *resultR,
-                             _Out_writes_opt_(order*order) float *resultG,
-                             _Out_writes_opt_(order*order) float *resultB )
+bool XM_CALLCONV XMSHEvalSphericalLight( _In_ size_t order,
+                                         _In_ FXMVECTOR pos,
+                                         _In_ float radius,
+                                         _In_ FXMVECTOR color,
+                                         _Out_writes_(order*order) float *resultR,
+                                         _Out_writes_opt_(order*order) float *resultG,
+                                         _Out_writes_opt_(order*order) float *resultB )
 {
     if ( !resultR )
         return false;
@@ -4630,13 +4630,13 @@ bool XMSHEvalSphericalLight( _In_ size_t order,
 //
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb204986.aspx
 //-------------------------------------------------------------------------------------
-bool XMSHEvalConeLight( _In_ size_t order,
-                        _In_ FXMVECTOR dir,
-                        _In_ float radius,
-                        _In_ FXMVECTOR color,
-                        _Out_writes_(order*order) float *resultR,
-                        _Out_writes_opt_(order*order) float *resultG,
-                        _Out_writes_opt_(order*order) float *resultB )
+bool XM_CALLCONV XMSHEvalConeLight( _In_ size_t order,
+                                    _In_ FXMVECTOR dir,
+                                    _In_ float radius,
+                                    _In_ FXMVECTOR color,
+                                    _Out_writes_(order*order) float *resultR,
+                                    _Out_writes_opt_(order*order) float *resultG,
+                                    _Out_writes_opt_(order*order) float *resultB )
 {
     if ( !resultR )
         return false;
@@ -4749,13 +4749,13 @@ bool XMSHEvalConeLight( _In_ size_t order,
 //
 // http://msdn.microsoft.com/en-us/library/windows/desktop/bb204989.aspx
 //-------------------------------------------------------------------------------------
-bool XMSHEvalHemisphereLight( _In_ size_t order,
-                              _In_ FXMVECTOR dir,
-                              _In_ FXMVECTOR topColor,
-                              _In_ FXMVECTOR bottomColor,
-                              _Out_writes_(order*order) float *resultR,
-                              _Out_writes_opt_(order*order) float *resultG,
-                              _Out_writes_opt_(order*order) float *resultB )
+bool XM_CALLCONV XMSHEvalHemisphereLight( _In_ size_t order,
+                                          _In_ FXMVECTOR dir,
+                                          _In_ FXMVECTOR topColor,
+                                          _In_ FXMVECTOR bottomColor,
+                                          _Out_writes_(order*order) float *resultR,
+                                          _Out_writes_opt_(order*order) float *resultG,
+                                          _Out_writes_opt_(order*order) float *resultB )
 {
     if ( !resultR )
         return false;

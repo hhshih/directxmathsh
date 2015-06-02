@@ -13,7 +13,7 @@
 #pragma once
 #endif
 
-#define DIRECTX_SHMATH_VERSION 100
+#define DIRECTX_SHMATH_VERSION 101
 
 #include <DirectXMath.h>
 
@@ -24,13 +24,18 @@ struct ID3D11Texture2D;
 
 namespace DirectX
 {
+#if (DIRECTXMATH_VERSION < 305) && !defined(XM_CALLCONV)
+#define XM_CALLCONV __fastcall
+typedef const DirectX::XMVECTOR& HXMVECTOR;
+typedef const DirectX::XMMATRIX& FXMMATRIX;
+#endif
 
 const size_t XM_SH_MINORDER = 2;
 const size_t XM_SH_MAXORDER = 6;
 
-float* XMSHEvalDirection( _Out_writes_(order*order) float *result, _In_ size_t order, _In_ FXMVECTOR dir );
+float* XM_CALLCONV XMSHEvalDirection( _Out_writes_(order*order) float *result, _In_ size_t order, _In_ FXMVECTOR dir );
 
-float* XMSHRotate( _Out_writes_(order*order) float *result, _In_ size_t order, _In_ CXMMATRIX rotMatrix, _In_reads_(order*order) const float *input );
+float* XM_CALLCONV XMSHRotate( _Out_writes_(order*order) float *result, _In_ size_t order, _In_ FXMMATRIX rotMatrix, _In_reads_(order*order) const float *input );
 
 float* XMSHRotateZ( _Out_writes_(order*order) float *result, _In_ size_t order, _In_ float angle, _In_reads_(order*order) const float *input );
 
@@ -52,17 +57,17 @@ float* XMSHMultiply5( _Out_writes_(25) float *result, _In_reads_(25) const float
 
 float* XMSHMultiply6( _Out_writes_(36) float *result, _In_reads_(36) const float *inputF, _In_reads_(36) const float *inputG );
 
-bool XMSHEvalDirectionalLight( _In_ size_t order, _In_ FXMVECTOR dir, _In_ FXMVECTOR color,
-                               _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
+bool XM_CALLCONV XMSHEvalDirectionalLight( _In_ size_t order, _In_ FXMVECTOR dir, _In_ FXMVECTOR color,
+                                           _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
 
-bool XMSHEvalSphericalLight( _In_ size_t order, _In_ FXMVECTOR pos, _In_ float radius, _In_ FXMVECTOR color,
-                             _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
+bool XM_CALLCONV XMSHEvalSphericalLight( _In_ size_t order, _In_ FXMVECTOR pos, _In_ float radius, _In_ FXMVECTOR color,
+                                         _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
 
-bool XMSHEvalConeLight( _In_ size_t order, _In_ FXMVECTOR dir, _In_ float radius, _In_ FXMVECTOR color,
-                        _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
+bool XM_CALLCONV XMSHEvalConeLight( _In_ size_t order, _In_ FXMVECTOR dir, _In_ float radius, _In_ FXMVECTOR color,
+                                    _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
 
-bool XMSHEvalHemisphereLight( _In_ size_t order, _In_ FXMVECTOR dir, _In_ FXMVECTOR topColor, _In_ FXMVECTOR bottomColor,
-                              _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
+bool XM_CALLCONV XMSHEvalHemisphereLight( _In_ size_t order, _In_ FXMVECTOR dir, _In_ FXMVECTOR topColor, _In_ FXMVECTOR bottomColor,
+                                          _Out_writes_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
 
 HRESULT SHProjectCubeMap( _In_ ID3D11DeviceContext *context, _In_ size_t order, _In_ ID3D11Texture2D *cubeMap,
                           _Out_writes_opt_(order*order) float *resultR, _Out_writes_opt_(order*order) float *resultG, _Out_writes_opt_(order*order) float *resultB );
